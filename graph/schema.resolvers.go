@@ -7,6 +7,7 @@ import (
 	"context"
 	"math/rand"
 	"strconv"
+	"time"
 
 	"github.com/EVAeng/asclepio/db"
 	"github.com/EVAeng/asclepio/graph/generated"
@@ -15,7 +16,9 @@ import (
 
 var doctorsCollection db.DoctorsCollection = db.New()
 
+
 func (r *mutationResolver) CreateDoctor(ctx context.Context, input model.NewDoctor) (*model.Doctor, error) {
+	rand.Seed(time.Now().UnixNano())
 	doctor := &model.Doctor{
 		ID:          strconv.Itoa(rand.Int()),
 		Name:        input.Name,
