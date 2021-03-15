@@ -1,0 +1,22 @@
+type Doctor {
+  id: ID!
+  name: String!
+  rate: Float
+  reviews: [String]
+  price: Float!
+  specialties: [String!]!
+}
+
+type Query {
+  doctors: [Doctor!]!
+}
+
+input NewDoctor {
+  name: String!
+  price: Float!
+  specialties: [String!]!
+}
+
+type Mutation {
+  createDoctor(input: NewDoctor!): Doctor!
+}
