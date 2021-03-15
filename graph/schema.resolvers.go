@@ -5,27 +5,31 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"math/rand"
+	"strconv"
 
+	"github.com/EVAeng/asclepio/db"
 	"github.com/EVAeng/asclepio/graph/generated"
 	"github.com/EVAeng/asclepio/graph/model"
 )
 
+var doctorsCollection db.DoctorsCollection = db.New()
+
 func (r *mutationResolver) CreateDoctor(ctx context.Context, input model.NewDoctor) (*model.Doctor, error) {
 	doctor := &model.Doctor{
-		ID:          fmt.Sprintf("T%d", rand.Int()),
+		ID:          strconv.Itoa(rand.Int()),
 		Name:        input.Name,
 		Price:       input.Price,
 		Specialties: input.Specialties,
 	}
 
-	r.doctors = append(r.doctors, doctor)
+	doctorsCollection.Save(doctor)
+
 	return doctor, nil
 }
 
 func (r *queryResolver) Doctors(ctx context.Context) ([]*model.Doctor, error) {
-	return r.doctors, nil
+	return doctorsCollection.FindAll(), nil
 }
 
 // Mutation returns generated.MutationResolver implementation.

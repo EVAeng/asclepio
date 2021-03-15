@@ -3,7 +3,7 @@
 package model
 
 type Doctor struct {
-	ID          string    `json:"id"`
+	ID          string    `json:"id" bson:"_id"`
 	Name        string    `json:"name"`
 	Rate        *float64  `json:"rate"`
 	Reviews     []*string `json:"reviews"`
