@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/EVAeng/asclepio/http"
+	"github.com/EVAeng/asclepio/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,6 +17,8 @@ func main() {
 	}
 
 	server := gin.Default()
+
+	server.Use(middleware.BasicAuth())
 	
 	server.GET("/", http.PlaygroundHandler())
 	server.POST("/query", http.GraphQLHandler())
