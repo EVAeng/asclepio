@@ -54,6 +54,6 @@ with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
         res.append(z)
     data["address_zip_code"] = pd.Series(res)  # 3 elements
 
-data.to_csv("dentists.csv")
+data.to_csv("dentists.csv", index=False)
 print(data.head(10))
 # 'https://tools.usps.com/tools/app/ziplookup/zipByAddress' --data 'companyName=&address1=131 W GRAND AVE&address2=SUITE B&city=EL SEGUNDO&state=CA&urbanCode=&zip=' -H "User-Agent: Mozilla/5.0"
